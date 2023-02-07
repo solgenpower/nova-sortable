@@ -55,7 +55,7 @@ export default {
         return 'notAllowed';
       }
 
-      if (this.hasDirection || this.isSorted) {
+      if (this.hasDirection && this.isSorted) {
         return 'activeSort';
       }
 

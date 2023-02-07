@@ -1,9 +1,8 @@
 <template>
-  <div class="overflow-hidden overflow-x-auto relative">
+  <div class="o1-overflow-y-hidden o1-overflow-x-auto o1-relative">
     <table
       v-if="resources.length > 0"
-      class="w-full"
-      :class="[`table-${tableStyle}`]"
+      class="o1-w-full o1-divide-y o1-divide-gray-100 dark:o1-divide-gray-700"
       cellpadding="0"
       cellspacing="0"
       data-testid="resource-table"
@@ -16,6 +15,7 @@
         :sortable="sortable"
         @order="requestOrderByChange"
         @reset-order-by="resetOrderBy"
+        :resource="fakeResources[0] || void 0"
       />
       <draggable
         tag="tbody"
@@ -24,12 +24,13 @@
         handle=".handle"
         draggable="tr"
         @update="updateOrder"
+        class="o1-divide-y o1-divide-gray-100 dark:o1-divide-gray-700"
       >
         <ResourceTableRow
           v-for="(resource, index) in fakeResources"
+          :key="`${resourceName}-items-${index}-${resource.id.value}`"
           @actionExecuted="$emit('actionExecuted')"
           :testId="`${resourceName}-items-${index}`"
-          :key="`${resource.id.value}-items-${index}`"
           :delete-resource="deleteResource"
           :restore-resource="restoreResource"
           :resource="resource"
